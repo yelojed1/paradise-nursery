@@ -2,6 +2,7 @@
   "name": "paradise-nursery",
   "private": true,
   "version": "0.1.0",
+  "homepage": "https://yelojed1.github.io/paradise-nursery/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
