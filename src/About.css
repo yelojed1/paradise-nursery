@@ -1,33 +1,67 @@
-.about-us-container {
-    width: 1000px;
-    /* margin: 0 auto; */
-    /* padding: 20px; */
-    /* background-color: red; */
+/* Utility Classes */
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-justify {
     text-align: justify;
-  }
-  
-  .about-us-heading {
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.font-large {
     font-size: 32px;
     font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .about-us-description {
-    font-size: 18px;
-    color: #666;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  .about-us-content {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  .plant_logo_right{
-    text-align: right;
-  }
+}
 
-  .plant_logo_left{
-    text-align: left;
-  }
+.font-medium {
+    font-size: 18px;
+}
+
+.margin-bottom-small {
+    margin-bottom: 20px;
+}
+
+.margin-bottom-large {
+    margin-bottom: 30px;
+}
+
+.text-color-primary {
+    color: #333;
+}
+
+.text-color-secondary {
+    color: #666;
+}
+
+/* About Us Component */
+.about-us-container {
+    width: 1000px;
+    text-align: justify;
+}
+
+.about-us-heading {
+    composes: text-color-primary font-large margin-bottom-small;
+}
+
+.about-us-description {
+    composes: text-align-center text-color-secondary font-medium margin-bottom-large;
+}
+
+.about-us-content {
+    composes: font-medium margin-bottom-small;
+}
+
+.plant-logo-right {
+    composes: text-align-right;
+}
+
+.plant-logo-left {
+    composes: text-align-left;
+}

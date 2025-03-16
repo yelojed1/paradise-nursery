@@ -1,58 +1,73 @@
-import React, { useState } from 'react';
-import { Provider } from 'react-redux';
+import {useState} from 'react';
+import {Provider} from 'react-redux';
 import ListProduct from './ListProduct';
 import Cart from './ItemCart';
 import store from './store';
 import './App.css';
 import About from './About';
 
+const LANDING_PAGE_CLASSES = {
+    container: "landing-page",
+    background: "background-image",
+    content: "content",
+    landingContent: "landing_content",
+    button: "get-started-button",
+    aboutContainer: "aboutus_container"
+};
+
 function App() {
-  const [showProductList, setShowProductList] = useState(false);
-  const [showCart, setShowCart] = useState(false);
+    const [isProductListVisible, setProductListVisible] = useState(false);
+    const [isCartVisible, setCartVisible] = useState(false);
 
-  const handleGetStartedClick = () => {
-    setShowProductList(true);
-    setShowCart(false);
-  };
+    const handleShowProductList = () => {
+        setProductListVisible(true);
+        setCartVisible(false);
+    };
 
-  const handleViewCartClick = () => {
-    setShowCart(true);
-    setShowProductList(false);
-  };
+    const handleShowCart = () => {
+        setCartVisible(true);
+        setProductListVisible(false);
+    };
 
-  const handleContinueShoppingClick = () => {
-    setShowCart(false);
-    setShowProductList(true);
-  };
+    const handleShowLandingPage = () => {
+        setProductListVisible(false);
+        setCartVisible(false);
+    };
 
-  return (
-    <Provider store={store}>
-      <div className="app-container">
-        {!showProductList && !showCart && (
-          <div className="landing-page">
-            <div className="background-image"></div>
-            <div className="content">
-              <div className="landing_content">
-                <h1>Welcome To Nursery</h1>
-                <button className="get-started-button" onClick={handleGetStartedClick}>
-                  Get Started
-                </button>
-              </div>
-              <div className="aboutus_container">
-                <About />
-              </div>
+    const renderLandingPage = () => (
+        <div className={LANDING_PAGE_CLASSES.container}>
+            <div className={LANDING_PAGE_CLASSES.background}></div>
+            <div className={LANDING_PAGE_CLASSES.content}>
+                <div className={LANDING_PAGE_CLASSES.landingContent}>
+                    <h1>Welcome To Nursery</h1>
+                    <button className={LANDING_PAGE_CLASSES.button} onClick={handleShowProductList}>
+                        Get Started
+                    </button>
+                </div>
+                <div className={LANDING_PAGE_CLASSES.aboutContainer}>
+                    <About/>
+                </div>
             </div>
-          </div>
-        )}
-        {showProductList && !showCart && (
-          <ListProduct onViewCartClick={handleViewCartClick} />
-        )}
-        {showCart && (
-          <Cart onContinueShopping={handleContinueShoppingClick} />
-        )}
-      </div>
-    </Provider>
-  );
+        </div>
+    );
+
+    const renderProductList = () => (
+        <ListProduct onViewCartClick={handleShowCart}/>
+    );
+
+    const renderCart = () => (
+        <Cart onContinueShopping={handleShowLandingPage}/>
+    );
+
+    return (
+        <Provider store={store}>
+            <div className="app-container">
+                {!isProductListVisible && !isCartVisible && renderLandingPage()}
+                {isProductListVisible && !isCartVisible && renderProductList()}
+                {isCartVisible && renderCart()}
+            </div>
+        </Provider>
+    );
 }
 
 export default App;
